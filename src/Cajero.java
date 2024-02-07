@@ -29,10 +29,15 @@ public class Cajero {
 
     public void retiroPersonalizado() {
         System.out.print( "Ingrese el monto a retirar: $" );
-        double cantidad = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
+        try {            
+            double cantidad = scanner.nextDouble();
+            scanner.nextLine(); // Limpiar el buffer del scanner
 
-        hacerRetiro( cantidad );
+            hacerRetiro( cantidad );   
+        } catch (Exception e) {
+            operacionInvalida();
+            retiroPersonalizado();
+        }
     }
 
     public void hacerRetiro(double cantidad) {
@@ -53,11 +58,23 @@ public class Cajero {
 
     public void hacerDeposito() {
         System.out.print("Ingrese la cantidad a depositar: $");
-        double cantidad = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer del scanner
 
-        currentUser.setMoney(currentUser.getMoney()+cantidad);
-        System.out.println("Depósito exitoso. Su saldo actual es: $" + currentUser.getMoney());
+        try {
+            double cantidad = scanner.nextDouble();
+            scanner.nextLine(); // Limpiar el buffer del scanner
+
+            currentUser.setMoney(currentUser.getMoney()+cantidad);
+            System.out.println("Depósito exitoso. Su saldo actual es: $" + currentUser.getMoney());
+        } catch (Exception e) {
+            operacionInvalida();
+            hacerDeposito();
+        }
+        
+    }
+
+    private void operacionInvalida(){
+        System.out.println("Operacion Invalida. Vuelva a intentarlo");
+        scanner.next();
     }
 
 }
