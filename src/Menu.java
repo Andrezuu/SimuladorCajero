@@ -1,22 +1,26 @@
 import java.util.Scanner;
 
 public class Menu {
-    
+
     private static Scanner scanner = new Scanner(System.in);
     private Cajero cajero;
     private User currentUser;
     private static final int INTENTOS_MAXIMOS = 3;
 
-    public Menu( User user ){
-        cajero = new Cajero( user );
+    public Menu(User user) {
+        cajero = new Cajero(user);
     }
 
-    public void iniciarSesion() {
+    public Menu() {
+        cajero = new Cajero();
+    }
+
+    public void iniciarSesion() throws InterruptedException {
         for (int intento = 0; intento < INTENTOS_MAXIMOS; intento++) {
             System.out.print("Por favor, introduzca su PIN: ");
             int pinUsuario = scanner.nextInt();
 
-            currentUser = cajero.getCurrentUser( pinUsuario );
+            currentUser = cajero.getCurrentUser(pinUsuario);
 
             if (currentUser != null) {
                 mostrarMenu();
@@ -27,12 +31,18 @@ public class Menu {
                     System.out.println("PIN incorrecto. Le quedan " + intentosRestantes + " intentos.");
                 } else {
                     System.out.println("Ha agotado todos los intentos. Acceso denegado.");
-                    return;
+                    for (int i = 30; i > 0; i--) {
+                        // "Duerme" el hilo por 1 segundo, el indice del for indica los segundos de
+                        // espera
+                        System.out.println("Quedan: " + i + " segundos");
+                        Thread.sleep(1000); //
+                    }
+                    iniciarSesion();
                 }
             }
         }
     }
-    
+
     private void menuRetiro() {
         System.out.println("Seleccione una opción:");
         System.out.println("1. Retirar cantidad predefinida");
@@ -55,8 +65,8 @@ public class Menu {
             default:
                 System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
         }
-    } 
-    
+    }
+
     private void retiroPredefinido() {
         System.out.println("Seleccione el monto de retiro:");
         System.out.println("1. $20");

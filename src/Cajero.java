@@ -11,11 +11,14 @@ public class Cajero {
     }};
 
     public Cajero( User user ) {
-        this.currentUser = user;
         users.add( user );
     }
+
+    public Cajero() {
+    }
+
     public User getCurrentUser( int pin ){
-    
+        
         for(User user: users){
             if( pin == user.getPin() ){
                 currentUser = user;
