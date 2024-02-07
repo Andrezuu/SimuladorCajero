@@ -3,14 +3,20 @@ import java.util.Scanner;
 public class Menu {
     
     private static Scanner scanner = new Scanner(System.in);
-    private Cajero cajero = new Cajero();
+    private Cajero cajero;
+    private User currentUser;
+    private static final int INTENTOS_MAXIMOS = 3;
+
+    public Menu( User user ){
+        cajero = new Cajero( user );
+    }
 
     public void iniciarSesion() {
         for (int intento = 0; intento < INTENTOS_MAXIMOS; intento++) {
             System.out.print("Por favor, introduzca su PIN: ");
             int pinUsuario = scanner.nextInt();
 
-            currentUser = getCurrentUser(pinUsuario);
+            currentUser = cajero.getCurrentUser( pinUsuario );
 
             if (currentUser != null) {
                 mostrarMenu();
