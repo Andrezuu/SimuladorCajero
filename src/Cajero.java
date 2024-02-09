@@ -6,8 +6,8 @@ public class Cajero {
     private static Scanner scanner = new Scanner( System.in );
     private User currentUser;
     private LinkedList<User> users = new LinkedList<User>() {{
-        add( new User( 100, 1234, "Zein" ) );
-        add( new User( 200, 5678, "Adrian" ) );
+        add( new User( 100, "01234", "Zein" ) );
+        add( new User( 200, "5678", "Adrian" ) );
     }};
 
     public Cajero( User user ) {
@@ -17,10 +17,10 @@ public class Cajero {
     public Cajero() {
     }
 
-    public User getCurrentUser( int pin ){
+    public User getCurrentUser( String pin ){
         
         for(User user: users){
-            if( pin == user.getPin() ){
+            if( pin .equals( user.getPin() )){
                 currentUser = user;
             }
         }

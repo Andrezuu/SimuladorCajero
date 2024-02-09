@@ -18,7 +18,7 @@ public class Menu {
     public void iniciarSesion() throws InterruptedException {
         for (int intento = 0; intento < INTENTOS_MAXIMOS; intento++) {
             System.out.print("Por favor, introduzca su PIN: ");
-            int pinUsuario = scanner.nextInt();
+            String pinUsuario = scanner.nextLine();
 
             currentUser = cajero.getCurrentUser(pinUsuario);
 

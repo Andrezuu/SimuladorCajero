@@ -1,10 +1,10 @@
 public class User {
 
     private double money;
-    private int pin;
+    private String pin;
     private String nombreCliente;
 
-    public User(int money, int pin, String nombreCliente) {
+    public User(int money, String pin, String nombreCliente) {
         this.money = money;
         this.pin = pin;
         this.nombreCliente = nombreCliente;
@@ -18,7 +18,7 @@ public class User {
         return money;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
